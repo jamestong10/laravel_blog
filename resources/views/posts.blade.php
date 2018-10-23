@@ -7,7 +7,7 @@
   <title>Blog</title>
 </head>
 <body>
-  <h1>Posts</h1>
+  <h1>所有文章</h1>
   <table>
   <thead>
     <tr>
@@ -20,10 +20,32 @@
   <tbody>
     @foreach($posts as $post)
       <tr>
-        <td>{{ $post['id'] }} </td>
-        <td>{{ $post['author'] }} </td>
-        <td>{{ $post['title'] }} </td>
-        <td>{{ $post['body'] }} </td>
+        <td>{{ $post->id}} </td>
+        <td>{{ $post->author}} </td>
+        <td>{{ $post->title}} </td>
+        <td>{{ $post->body}} </td>
+      </tr>
+    @endforeach
+  </tbody>
+  </table>
+
+  <h1>熱門文章</h1>
+  <table>
+  <thead>
+    <tr>
+      <td>瀏覽數</td>
+      <td>作者</td>
+      <td>標題</td>
+      <td>內容</td>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($hotPosts as $post)
+      <tr>
+        <td>{{ $post->hits}} </td>
+        <td>{{ $post->author}} </td>
+        <td>{{ $post->title}} </td>
+        <td>{{ $post->body}} </td>
       </tr>
     @endforeach
   </tbody>

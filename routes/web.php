@@ -16,16 +16,12 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', function () {
-    $posts = [];
-
-    for($i = 1; $i <= 10; $i++) {
-        array_push($posts, array('id' => $i, 
-            'title' => str_random(10), 
-            'body' => str_random(10),
-            'author' => str_random(10)
-        ));
-    }
-    return view('posts', compact('posts'));
+    $posts = DB::table('posts')->get();
+    $hotPosts = DB::table('posts')
+        ->where('hits', '>', 50)
+        ->orderBy('hits', 'desc')
+        ->get();
+    return view('posts', compact('posts', 'hotPosts'));
 });
 
 
