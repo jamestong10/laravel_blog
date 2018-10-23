@@ -50,5 +50,23 @@
     @endforeach
   </tbody>
   </table>
+
+  <h2>分類統計</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>類別</td>
+        <td>數量</td>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($states as $state)
+        <tr>
+          <td>{{ $mappingState[$state->state] }}</td>
+          <td>{{ $state->cnt }}</td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
 </body>
 </html>
