@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Post;
 
+use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePost;
 
 class PostsController extends Controller
 {
@@ -23,7 +24,9 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store() {
+    public function store(StorePost $request) {
+        $validated = $request->validate();
+
         try {
             $post = new Post;
             $post->title = request('title');
@@ -32,7 +35,7 @@ class PostsController extends Controller
             $post->save();
         } catch(\Exception $e) {
             echo $e->getMessage();
-            return back()->with('error', '文章建立失敗，請重新輸入');
+            return back()->withErrors('文章建立失敗請重新輸入');
         }
 
         return redirect()->route('posts_index');
