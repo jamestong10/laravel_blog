@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('author');
-            $table->integer('state'); // 0: Draft, 1: Publish, 2:Private, 3: Trash
-            $table->integer('hits');
+            $table->integer('state')->default(0); // 0: Draft, 1: Publish, 2:Private, 3: Trash
+            $table->integer('hits')->default(0);
             $table->timestamps();
         });
     }
