@@ -11,5 +11,5 @@
     <span>日期: {{ \Carbon\Carbon::parse($post->created_at)->format('Y/m/d G:i:s') }}</span>
   </div>
   <div class="content">{{ $post->body }}</div>
-  <a href="{{route('posts_index')}}">Back</a>
+  <a href="{{route('posts_index')}}" class="btn btn-primary">Back</a>
 @endsection
