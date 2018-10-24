@@ -5,11 +5,8 @@
 @endsection
 
 @section('content')
-  @if (session('error'))
-  <div class="alert alert-success">
-      {{ session('error') }}
-  </div>
-  @endif
+  @include('layouts.errors')
+
   <h1>Create</h1>
   <hr>
   <form action="{{route('posts_store')}}" method="POST">
