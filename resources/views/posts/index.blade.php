@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+  <div class="add-post">
+  <a href="{{ route('posts_create') }}">新增文章</a>
+  </div>
   <h1>所有文章</h1>
   <table>
   <thead>
