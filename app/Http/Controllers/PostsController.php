@@ -40,4 +40,25 @@ class PostsController extends Controller
 
         return redirect()->route('posts_index');
     }
+
+    public function edit($id) {
+        $post = Post::find($id);
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(StorePost $request, $id) {
+        $validated = $request->validate();
+
+        try {
+            $post = Post::find($id);
+            $post->title = $request['title'];
+            $post->body = $request['body'];
+            $post->save();
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+            return back()->withErrors('文章更新失敗請重新輸入');
+        }
+
+        return redirect()->route('posts_index');
+    }
 }

@@ -12,6 +12,7 @@
   <table>
   <thead>
     <tr>
+      <td>編輯</td>
       <td>編號</td>
       <td>作者</td>
       <td>標題</td>
@@ -21,6 +22,7 @@
   <tbody>
     @foreach($posts as $post)
       <tr>
+        <td><a href="{{route('posts_edit', ['post' => $post->id])}}">Edit</a></td>
         <td>{{ $post->id}} </td>
         <td>{{ $post->author}} </td>
         <td>
