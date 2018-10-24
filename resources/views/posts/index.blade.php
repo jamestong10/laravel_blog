@@ -21,7 +21,7 @@
         <td>{{ $post->id}} </td>
         <td>{{ $post->author}} </td>
         <td>
-          <a href="/posts/{{$post->id}}">
+          <a href="{{route('posts_show', ['post' => $post->id])}}">
             {{ $post->title}}
           </a>
         </td>
@@ -47,7 +47,7 @@
         <td>{{ $post->hits}} </td>
         <td>{{ $post->author}} </td>
         <td>
-          <a href="/posts/{{$post->id}}">
+          <a href="{{route('posts_show', ['post' => $post->id])}}">
             {{ $post->title}}
           </a>
         </td>

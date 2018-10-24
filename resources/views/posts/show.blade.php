@@ -12,4 +12,5 @@
     <span>日期: {{ $post->created_at }}</span>
   </div>
   <div class="content">{{ $post->body }}</div>
+  <a href="{{route('posts_index')}}">Back</a>
 @endsection
