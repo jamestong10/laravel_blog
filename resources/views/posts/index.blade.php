@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+  @include('layouts.errors')
   <div class="add-post mt-2">
     <a href="{{ route('posts_create') }}" class="btn btn-primary">新增文章</a>
   </div>
