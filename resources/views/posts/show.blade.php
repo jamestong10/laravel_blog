@@ -11,5 +11,14 @@
     <span>日期: {{ $post->created_at->format('Y/m/d G:i:s') }}</span>
   </div>
   <div class="content">{{ $post->body }}</div>
-  <a href="{{route('posts_index')}}" class="btn btn-primary">Back</a>
+  <div class="comments mt-3">
+    <ul class="list-group">
+      @foreach ($post->comments as $comment)
+        <li class="list-group-item"> {{ $comment->body }} ({{ $comment->created_at->diffForHumans() }}) </li>
+      @endforeach
+    </ul>
+  </div>
+  <div class="mt-3">
+    <a href="{{route('posts_index')}}" class="btn btn-primary">Back</a>
+  </div>
 @endsection
