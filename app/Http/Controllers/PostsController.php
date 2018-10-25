@@ -31,6 +31,9 @@ class PostsController extends Controller
     }
 
     public function store(StorePost $request) {
+        $request->validate([
+            'title' => 'regex:/(^\w+$)/'
+        ]);
         
         try {
             $post = new Post;
