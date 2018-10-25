@@ -3,20 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePost;
 
 class PostsController extends Controller
 {   
+    
+    protected $postRepository;
+
+    public function __construct(PostRepository $postRepository )
+    {
+        $this->postRepository = $postRepository;
+    }
+
     public function index() {
-        $hotPosts = Post::published()->where('hits', '>', 50)->descendingHits()->get();
-        $states = Post::selectRaw('state, count(state) as cnt')->groupBy('state')->get();
+        $hotPosts = $this->postRepository->hotPost();
+        $states = $this->postRepository->statisticState();
         $mappingState = ['0' => '草稿', '1' => '公開發佈', '2' => '私人發佈', '3' => '垃圾桶'];
         return view('posts.index', compact('hotPosts', 'states', 'mappingState'));
     }
 
     public function show($id) {
-        $post = Post::find($id);
+        $post = $this->postRepository->find($id);
+
         if (!is_null($post)) {
             return view('posts.show', compact('post'));
         } else {
@@ -48,7 +58,7 @@ class PostsController extends Controller
     }
 
     public function edit($id) {
-        $post = Post::find($id);
+        $post = $this->postRepository->find($id);
 
         if (!is_null($post)) { 
             return view('posts.edit', compact('post'));
@@ -60,7 +70,7 @@ class PostsController extends Controller
     public function update(StorePost $request, $id) {
 
         try {
-            $post = Post::find($id);
+            $post = $this->postRepository->find($id);
             $post->title = $request['title'];
             $post->body = $request['body'];
             $post->save();
