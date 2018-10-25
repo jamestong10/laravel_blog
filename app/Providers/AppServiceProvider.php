@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('posts.index', function($view) {
+            $posts = \App\Post::orderBy('created_at', 'desc')->get();
+            $posts = $posts->reject(function($post) {
+                return $post->title === '' && $post->body === '';
+            });
+            $view->with('posts', $posts);
+        });
     }
 
     /**
