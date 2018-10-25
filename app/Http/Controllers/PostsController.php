@@ -28,9 +28,9 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store(StorePost $request) {
+    public function store(StorePost $request) { 
         $request->validate([
-            'title' => 'regex:/(^\w+$)/'
+            'title' => 'regex:/(^[a-zA-Z0-9_ ]+$)/'
         ]);
 
         try {
