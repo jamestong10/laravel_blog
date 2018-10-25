@@ -17,8 +17,13 @@ class PostsController extends Controller
         return view('posts.index', compact('posts', 'hotPosts', 'states', 'mappingState'));
     }
 
-    public function show(Post $post) {
-        return view('posts.show', compact('post'));
+    public function show($id) {
+        $post = Post::find($id);
+        if (!is_null($post)) {
+            return view('posts.show', compact('post'));
+        } else {
+            return redirect()->route('posts_index')->with('error', '查無此文章');
+        }
     }
 
     public function create() {
@@ -26,7 +31,7 @@ class PostsController extends Controller
     }
 
     public function store(StorePost $request) {
-
+        
         try {
             $post = new Post;
             $post->title = request('title');
@@ -43,7 +48,12 @@ class PostsController extends Controller
 
     public function edit($id) {
         $post = Post::find($id);
-        return view('posts.edit', compact('post'));
+
+        if (!is_null($post)) { 
+            return view('posts.edit', compact('post'));
+        } else {
+            return redirect()->route('posts_index')->with('error', '查無此文章');
+        }
     }
 
     public function update(StorePost $request, $id) {
