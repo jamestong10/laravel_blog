@@ -15,3 +15,5 @@ yarn-error.log
 /public/css
 /public/js
 package-lock.json
+composer.lock
+/storage/debugbar/*
