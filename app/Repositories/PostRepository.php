@@ -21,4 +21,11 @@ class PostRepository {
             ->groupBy('state')
             ->get();
   }
+
+  public function all() {
+    $posts = Post::orderBy('created_at', 'desc')->get();
+    return $posts->reject(function($post) {
+      return $post->title === '' && $post->body === '';
+    });
+  }
 }

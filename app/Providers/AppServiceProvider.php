@@ -14,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer(
+            'posts.index', 'App\Http\ViewComposers\PostComposer'
+        );
     }
 
     /**
