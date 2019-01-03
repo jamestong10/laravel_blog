@@ -22,10 +22,14 @@ class PostRepository {
             ->get();
   }
 
-  public function all() {
+  public function allPosts() {
     $posts = Post::orderBy('created_at', 'desc')->get();
     return $posts->reject(function($post) {
       return $post->title === '' && $post->body === '';
     });
+  }
+
+  public function allPostsIncludeEmptyTitleAndBody() {
+    return Post::orderBy('created_at', 'desc')->get();
   }
 }
