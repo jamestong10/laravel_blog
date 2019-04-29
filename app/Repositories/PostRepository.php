@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Post;
+use Cache;
 
 class PostRepository {
 
@@ -23,10 +24,14 @@ class PostRepository {
   }
 
   public function allPosts() {
-    $posts = Post::orderBy('created_at', 'desc')->get();
-    return $posts->reject(function($post) {
-      return $post->title === '' && $post->body === '';
+    $posts = Cache::rememberForever('all_posts', function() {
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return $posts->reject(function($post) {
+            return $post->title === '' && $post->body === '';
+        });
     });
+
+    return $posts;
   }
 
   public function allPostsIncludeEmptyTitleAndBody() {

@@ -13,18 +13,18 @@ class PostComposer
      *
      * @var PostRepository
      */
-    protected $posts;
+    protected $postRepo;
 
     /**
      * Create a new Post composer.
      *
-     * @param  PostRepository  $posts
+     * @param  PostRepository  $postRepo
      * @return void
      */
-    public function __construct(PostRepository $posts)
+    public function __construct(PostRepository $postRepo)
     {
         // Dependencies automatically resolved by service container...
-        $this->posts = $posts;
+        $this->postRepo = $postRepo;
     }
 
     /**
@@ -35,6 +35,6 @@ class PostComposer
      */
     public function compose(View $view)
     {
-        $view->with('posts', $this->posts->all());
+        $view->with('posts', $this->postRepo->allPosts());
     }
 }
