@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Repositories;
-use App\Post;
+
+use App\Models\Post;
 use Cache;
 
 class PostRepository {

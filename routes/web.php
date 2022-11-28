@@ -1,7 +1,5 @@
 <?php
 
-use App\Post;
-
 Route::get('/', function () {
     return view('welcome');
 });

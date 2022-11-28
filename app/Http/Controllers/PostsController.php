@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\Models\Post;
 use App\Repositories\PostRepository;
-use Illuminate\Http\Request;
 use App\Http\Requests\StorePost;
 
 class PostsController extends Controller
-{   
-    
+{
+
     protected $postRepository;
 
     public function __construct(PostRepository $postRepository )
@@ -38,7 +37,7 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store(StorePost $request) { 
+    public function store(StorePost $request) {
         $request->validate([
             'title' => 'regex:/(^[a-zA-Z0-9_ ]+$)/'
         ]);
@@ -60,7 +59,7 @@ class PostsController extends Controller
     public function edit($id) {
         $post = $this->postRepository->find($id);
 
-        if (!is_null($post)) { 
+        if (!is_null($post)) {
             return view('posts.edit', compact('post'));
         } else {
             return redirect()->route('posts_index')->with('error', '查無此文章');
